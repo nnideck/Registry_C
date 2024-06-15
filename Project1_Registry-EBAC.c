@@ -65,7 +65,6 @@ int consultUser(){
 	
     char cpf[40]; //var para salvar o cpf
     char content[200]; //var para salvar o conteudo do file
-    char result;
     char *t; 
     char *number;
     char *name;
@@ -79,16 +78,15 @@ int consultUser(){
     file = fopen(cpf, "r"); //obro o arquivo (nome do file, "r" para read)
     
     if(file == NULL){ //se não houver correspondência (CPF não valido)
-    	printf("\nNo user found\n"); //imprimo que não foi localizado
-	}
+    	printf("\nNo user found\n\n"); //imprimo que não foi localizado
+	} 
 	
-    
+	
     while (fgets(content, 200, file) != NULL){//enquanto a função nativa fgets 
 	    //(pega o conteudo do file e salva na var, até 200 caract, vindo do arquivo file)
 	    // != NULL enquanto houver conteúdo
 	    printf("\nUser information:\n\n");
 	    t = strtok (content, ",");
-	    
 	    
 	    int i=0;
 	    while (t !=NULL) {
@@ -114,24 +112,79 @@ int consultUser(){
 		printf ("Surname:%s\n", surname);
 		printf ("Role:%s\n", role);
 		printf("\n\n");
-		system("pause");
 		}
 	    
-	    
-       // while (content != NULL){
-    	//printf ("%s/n", t); 
-    	//t = strtok(NULL, ",");
-		//}
-    	//printf("\n\n");	
+        system("pause");
 	} 
     
-	//system("pause");
+	
 
 
 int deleteUser(){
-	printf("Você escolheu deletar usuário!\n\n");
-	system("pause");
-}
+	char cpf[40]; //var para salvar o cpf
+	char *t;
+	char *number;
+    char *name;
+    char *surname;
+    char userOption[1];
+    char content[200];
+	
+    printf("\nType a CPF number to delete:\n");
+    scanf("%s", cpf); //salvar o input (string) na variável
+    
+    FILE *file; //chamo a função de arquivo
+    file = fopen(cpf, "r");
+    
+    if(file == NULL){
+         printf("\nUser not found\n\n");
+    }
+    while (fgets(content, 200, file) != NULL){
+	    
+	    t = strtok (content, ",");
+	    
+	    int i=0;
+	    while (t !=NULL) {
+	    switch (i){
+	    	case 0:
+			  number = t;
+	          break;
+	        case 1:
+			  name = t;
+	          break;
+	        case 2:
+			  surname = t;
+	          break;
+			};
+		t = strtok (NULL, ",");
+		i++;
+		}
+		
+		fclose(file);
+        printf("\nAre you sure you want to delete ");
+	    printf("%s ", name);
+	    printf("%s", surname);
+        printf("? (Y / N) \n\n");
+        
+        scanf("%s", userOption);
+        
+        userOption[0] = tolower(userOption[0]);
+        
+        if (strcmp(userOption, "y") == 0) {
+           remove(cpf);
+           printf("\nUser deleted successfully!\n\n");
+        }
+        else if (strcmp(userOption, "n") == 0) {
+           deleteUser();
+        }
+        else {
+           printf("This option is not available.\n");
+           deleteUser();
+        }
+
+        }
+	     system("pause");    
+     }
+
 
 int main(){ //função principal executada automaticamente
 	
