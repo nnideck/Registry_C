@@ -216,6 +216,7 @@ int deleteUser(){ //função para deletar o usuário
 
 
 int main(){ //função principal executada automaticamente
+	setlocale (LC_ALL, "Portuguese");
 	
 	int input=0; //variável para guardar a opção digitada pelo usuário
 	
@@ -224,8 +225,15 @@ int main(){ //função principal executada automaticamente
 	//coloco o FOR aqui para, ao final da execução da função, ela se repetir e reiniciar deste ponto
 	//assim que o usuário terminar a operação, voltará à tela inicial do menu 
 	
-	for(x=1;x=1;) 
-	{   
+	char inputPassword[10] = "";
+	
+	printf("### Cartório EBAC ### \n\n"); //título - #para ornamento
+    printf ("###Admin Login###\n Type your password:");
+    scanf("%s", inputPassword);
+    
+    if (strcmp(inputPassword, "admin") == 0) {
+      for(x=1;x=1;) 
+    	{   
 	    system("cls"); //para limpar a tela após o looping
 
     	setlocale (LC_ALL, "Portuguese"); //para informar a região - assim ele aceitará acentos
@@ -257,9 +265,17 @@ int main(){ //função principal executada automaticamente
 			    printf("This option is not available.\n\n");
 		        system("pause");
 		    break;
-		    
+	 	    
 		};
-	};
+       };
+     } else {
+        printf("\nIncorrect password\n\n");
+        system("pause");
+        main();
+        
+            }
+	
+	
 	
 	//printf("Este software é de livre uso.\n");
 }
