@@ -1,4 +1,4 @@
-#include <stdio.h> //biblioteca de comunicação com o usuario
+ #include <stdio.h> //biblioteca de comunicação com o usuario
 #include <stdlib.h> //biblioteca de alocação de espaço em memoria
 #include <locale.h> //biblioteca de alocações de texto por regiao
 #include <string.h> //biblioteca para strings
@@ -67,16 +67,15 @@ int registerAnother() {
            registerUser(); //volto para o início da função
         }
         else if (strcmp(userOption, "n") == 0) {//compara a opção do usuario com o termo "n". Se o resultado for zero (igual)
-           main(); //volta para o menu principal
+           system("pause"); 
         }
         else {//se nenhuma das opções anteriores..
            printf("This option is not available.\n");//imprimo a mensagem na tela
            registerAnother();
         }
-        system("pause");}
+}
     registerAnother();
  
-    system("pause");
 }
 
 int consultUser(){//função responsável por consultar usuários no sistema;
@@ -218,6 +217,7 @@ int deleteUser(){ //função para deletar o usuário
 int main(){ //função principal executada automaticamente
 	setlocale (LC_ALL, "Portuguese");
 	
+	system("cls");
 	int input=0; //variável para guardar a opção digitada pelo usuário
 	
 	int x=1;
@@ -226,6 +226,8 @@ int main(){ //função principal executada automaticamente
 	//assim que o usuário terminar a operação, voltará à tela inicial do menu 
 	
 	char inputPassword[10] = "";
+	char userOption[1];
+	char userExitOption[1];
 	
 	printf("### Cartório EBAC ### \n\n"); //título - #para ornamento
     printf ("###Admin Login###\n Type your password:");
@@ -242,7 +244,8 @@ int main(){ //função principal executada automaticamente
 	    printf ("Choose an option: \n\n");
 	    printf("\t1 - User Register\n"); // \t serve para dar uma espaço prévio
 	    printf("\t2 - User Consult\n");
-	    printf("\t3 - User Delete\n\n\n");
+	    printf("\t3 - User Delete\n");
+	    printf("\t4 - Exit\n\n\n");
 	    printf("Type your option:\n");
 	
 	    scanf("%d", &input); //puxar a informação dada pelo usuario
@@ -260,6 +263,21 @@ int main(){ //função principal executada automaticamente
 		    case 3: 
 	    	    deleteUser();
 		    break;
+		    case 4: 
+                printf("Are you sure you want to exit? (Y / N)\n\n");
+                scanf("%s", userExitOption);
+                userExitOption[0] = tolower(userExitOption[0]);
+        
+                if (strcmp(userExitOption, "y") == 0) {
+                   exit(0);
+                   }
+                else if (strcmp(userExitOption, "n") == 0) {
+                   system("pause");
+                   }
+                else {//se nenhuma das opções anteriores..
+                   system("pause");
+                   }
+		    break;
 		    
 		    default: //no caso de o input não ser nenhuma das citadas
 			    printf("This option is not available.\n\n");
@@ -269,14 +287,22 @@ int main(){ //função principal executada automaticamente
 		};
        };
      } else {
-        printf("\nIncorrect password\n\n");
-        system("pause");
-        main();
+        printf("\nIncorrect password\n");
+        printf("\nDo you want to exit? (Y / N)\n\n");
+        scanf("%s", userOption);
+        userOption[0] = tolower(userOption[0]);
         
+        if (strcmp(userOption, "y") == 0) {//compara a opção do usuario com o termo "y". Se o resultado for zero (igual)
+           exit(0);
+        }
+        else if (strcmp(userOption, "n") == 0) {//compara a opção do usuario com o termo "n". Se o resultado for zero (igual)
+           main();
+        }
+        else {//se nenhuma das opções anteriores..
+           main();
+        }
+        system("pause");
             }
-	
-	
-	
 	//printf("Este software é de livre uso.\n");
 }
 
