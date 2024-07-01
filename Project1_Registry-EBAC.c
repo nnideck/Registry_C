@@ -1,4 +1,4 @@
- #include <stdio.h> //biblioteca de comunicação com o usuario
+#include <stdio.h> //biblioteca de comunicação com o usuario
 #include <stdlib.h> //biblioteca de alocação de espaço em memoria
 #include <locale.h> //biblioteca de alocações de texto por regiao
 #include <string.h> //biblioteca para strings
@@ -225,7 +225,7 @@ int main(){ //função principal executada automaticamente
 	//coloco o FOR aqui para, ao final da execução da função, ela se repetir e reiniciar deste ponto
 	//assim que o usuário terminar a operação, voltará à tela inicial do menu 
 	
-	char inputPassword[10] = "";
+	char inputPassword[10];
 	char userOption[1];
 	char userExitOption[1];
 	
